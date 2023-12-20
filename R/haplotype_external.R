@@ -127,7 +127,8 @@ write_battenberg_phasing <- function(tumourname, SNPfiles, imputedHaplotypeFiles
     chrom = chrom_names[i] 
     # read allele counts and imputed haplotypes (for the actually used alleles & loci)
     snp_data <- read_alleleFrequencies(SNPfiles[i])
-    allele_data <- read_imputed_output(imputedHaplotypeFiles[i])[, c("pos", "ref", "alt", "hap1", "hap2")]
+    allele_data <- read_imputed_output(imputedHaplotypeFiles[i])[,3:7]
+    colnames(allele_data) <- c("pos", "ref", "alt", "hap1", "hap2")
     merge_data <- merge(x = allele_data, y = snp_data, by.x = "pos", by.y = "POS", sort = F)
     
     # map counts to ref/alt
